@@ -51,18 +51,14 @@ function App() {
 
   return (
     <>
-      <h1>hi</h1>
-      <div>
-     
+      <div>     
           <Navbar />
           <Routes>
             <Route path="/home" element={<HomePage />} />
             <Route path="/category" element={<CategoryPage />} />
             <Route path="/favorites" element={<FavoritesPage />} />
-            <Route path="/recipe/:recipeId" element={<RecipeDetailPage />} />
-          
-          </Routes>
-   
+            <Route path="/recipe/:recipeId" element={<RecipeDetailPage />} />          
+          </Routes>   
       </div>
     </>
   )

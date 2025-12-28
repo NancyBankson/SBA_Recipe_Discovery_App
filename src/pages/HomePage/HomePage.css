@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 25px;
+}
+
+.category-card {
+    max-width: 300px; 
+}
+
+.category-card img {
+    width: 100%;
+}
