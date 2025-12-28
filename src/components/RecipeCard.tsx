@@ -1,7 +1,8 @@
-import { useContext } from "react"
-import { Favort}
+// import { useContext } from "react"
+// import { FavoritesContext } from "../context/FavoritesContext"
 
 export function RecipeCard( { recipe }) {
+
     return (
         <div>
             <h4>{recipe.strMeal}</h4>

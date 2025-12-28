@@ -1,24 +1,39 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import type { meal } from '../../types';
+// import { useState } from 'react';
+import type { Categories } from '../../types';
 import { useFetch } from '../../hooks/useFetch';
-import { blogObj } from '../../lib/posts';
 
 export function HomePage() {
-  const [recipes, setRecipes] = useState([]);
+  // const [categories, setCategories] = useState<Categories[]>([]);
   
-  const allRecipes: meal[] = useFetch("https://www.themealdb.com/api/json/v1/1/search.php?f=a");
+  const { data, loading, error }= useFetch<{ categories: Categories[] }>("https://www.themealdb.com/api/json/v1/1/categories.php");
 
-  setRecipes(allRecipes);
+  if (loading) {
+    return (
+      <div>
+        Loading recipes...
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div>
+        Error: {error.message}
+      </div>
+    )
+  }
+  console.log(data);
 
   return (
     <div>
-      <h2>Blog Detail Page</h2>
-      {recipes.map((recipe) => {
+      <h2>Categories</h2>
+      {data?.categories.map((category) => {
         return (
-          <p key={recipe.idMeal}>
-            <RecipeCard />
-          </p>
+          <div key={category.idCategory}>
+              <p>{category.strCategory}</p>
+              <p>{category.strCategoryDescription}</p>
+              <img src={category.strCategoryThumb} />
+          </div>          
         );
       })}
     </div>
