@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useFetch } from "../../hooks/useFetch";
 import type { Recipe } from "../../types";
+import "./RecipeDetail.css"
 import { Link } from "react-router-dom";
 
 export function RecipeDetailPage() {
@@ -21,17 +22,16 @@ export function RecipeDetailPage() {
       </div>
     )
   }
- console.log(data?.meals[0].strMeal);
+  console.log(data?.meals[0].strMeal);
 
   return (
-    <div>
-      <h2>Recipe Detail</h2>
-      <div className='container'>       
-            <div className="recipe-card" key={data?.meals[0].idMeal}>
-              <img src={data?.meals[0].strMealThumb} />
-              <h5>{data?.meals[0].strMeal}</h5>           
-              <p>{data?.meals[0].strInstructions}</p>
-            </div>
+    <div className='container'>
+      <div className="recipe-full" key={data?.meals[0].idMeal}>
+        <img src={data?.meals[0].strMealThumb} />
+        <div>
+          <h5>{data?.meals[0].strMeal}</h5>
+          <p>{data?.meals[0].strInstructions}</p>
+        </div>
       </div>
     </div>
   );
