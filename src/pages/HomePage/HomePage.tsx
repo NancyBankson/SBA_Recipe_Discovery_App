@@ -1,6 +1,7 @@
 import type { Categories } from '../../types';
 import { useFetch } from '../../hooks/useFetch';
 import './HomePage.css'
+import { Link } from 'react-router-dom';
 
 export function HomePage() {
 
@@ -29,7 +30,8 @@ export function HomePage() {
           return (
             <div className="category-card" key={category.idCategory}>
               <img src={category.strCategoryThumb} />
-              <h3>{category.strCategory}</h3>
+              <Link to={`/category/${category.strCategory}`}>{category.strCategory}</Link>
+              {/* <h3 id={category.idCategory.toString()} onClick={(event) => handleClick(category.idCategory, event)}>{category.strCategory}</h3> */}
               <p>{category.strCategoryDescription}</p>
             </div>
           );
