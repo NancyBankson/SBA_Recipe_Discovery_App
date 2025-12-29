@@ -2,11 +2,13 @@ import { useParams } from "react-router-dom"
 import { useFetch } from "../../hooks/useFetch";
 import type { Recipe } from "../../types";
 import "./RecipeDetail.css"
-import { Link } from "react-router-dom";
+import { FavoritesContext } from "../../context/FavoritesContext";
+import { useContext } from "react";
 
 export function RecipeDetailPage() {
   const { recipeId } = useParams();
   const { data, loading, error } = useFetch<{ meals: Recipe[] }>(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`);
+  const favoriteRecipes = useContext(FavoritesContext);
 
   if (loading) {
     return (
@@ -22,7 +24,14 @@ export function RecipeDetailPage() {
       </div>
     )
   }
-  console.log(data?.meals[0].strMeal);
+  if (data?.meals[0].isFavorite === null) {
+    data.meals[0].isFavorite = false;
+  }
+
+  function handleFavorite {
+    data?.meals[0].isFavorite ? false : true;
+    favoriteRecipes.push(data?.meals[0]);
+  }
 
   return (
     <div className='container'>
@@ -30,6 +39,7 @@ export function RecipeDetailPage() {
         <div className="recipe-head">
           <img src={data?.meals[0].strMealThumb} />
         <h1>{data?.meals[0].strMeal}</h1>
+        <button onClick={handleFavorite}>{data?.meals[0].isFavorite ? "Remove from Favorites" : "Add to Favorites"}</button>
         </div>        
         <div className="recipe-body">
           <div className="ingredients">
