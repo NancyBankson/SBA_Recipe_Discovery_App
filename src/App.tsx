@@ -33,6 +33,10 @@ function App() {
     console.log(displayFavorites);
   }
 
+  useEffect(() => {
+    console.log(displayFavorites);
+  }, [displayFavorites]);
+
   return (
     <>
       <div>

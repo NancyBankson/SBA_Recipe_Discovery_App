@@ -22,7 +22,6 @@ export function CategoryPage() {
       </div>
     )
   }
-  // console.log(data.meals);
 
   return (
     <div>
@@ -33,8 +32,6 @@ export function CategoryPage() {
             <div className="recipe-card" key={meal.idMeal}>
               <img src={meal.strMealThumb} />
               <Link to={`/recipe/${meal.idMeal}`}>{meal.strMeal}</Link>
-              {/* <h3 id={category.idCategory.toString()} onClick={(event) => handleClick(category.idCategory, event)}>{category.strCategory}</h3> */}
-              {/* <p>{meal.strInstructions}</p> */}
             </div>
           );
         })}
