@@ -26,7 +26,7 @@ export function CategoryPage() {
 
   return (
     <div>
-      <h2>Categories</h2>
+      <h2>{categoryName}</h2>
       <div className='container'>
         {data?.meals.map((meal) => {
           return (
@@ -34,7 +34,7 @@ export function CategoryPage() {
               <img src={meal.strMealThumb} />
               <Link to={`/recipe/${meal.idMeal}`}>{meal.strMeal}</Link>
               {/* <h3 id={category.idCategory.toString()} onClick={(event) => handleClick(category.idCategory, event)}>{category.strCategory}</h3> */}
-              <p>{meal.strInstructions}</p>
+              {/* <p>{meal.strInstructions}</p> */}
             </div>
           );
         })}

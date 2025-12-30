@@ -66,3 +66,15 @@ export interface Categories {
     strCategoryDescription: string,
     strCategoryThumb: string
 }
+
+export interface FavoriteMeal {
+    id: number | undefined;
+    title: string | undefined;
+    thumbnail: string | undefined;
+}
+
+export interface FavoritesContextType {
+    addFavorite: (id: number, title: string, thumbnail: string) => void;
+    removeFavorite: (id: number) => void;
+    displayFavorites: FavoriteMeal[];
+}

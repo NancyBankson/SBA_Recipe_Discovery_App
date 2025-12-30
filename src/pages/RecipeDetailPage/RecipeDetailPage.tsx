@@ -1,14 +1,21 @@
 import { useParams } from "react-router-dom"
 import { useFetch } from "../../hooks/useFetch";
-import type { Recipe } from "../../types";
+import type { FavoriteMeal, FavoritesContextType, Recipe } from "../../types";
+import { useState } from "react";
 import "./RecipeDetail.css"
 import { FavoritesContext } from "../../context/FavoritesContext";
 import { useContext } from "react";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 export function RecipeDetailPage() {
   const { recipeId } = useParams();
   const { data, loading, error } = useFetch<{ meals: Recipe[] }>(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`);
-  const favoriteRecipes = useContext(FavoritesContext);
+  const favoritesContext = useContext(FavoritesContext);
+  const [storedRecipes, setStoredRecipes] = useLocalStorage<FavoriteMeal[]>("favorites", []);
+  const [favorites, setFavorites] = useState<FavoriteMeal[]>(storedRecipes);
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+ 
+  const {addFavorite, removeFavorite} = favoritesContext;
 
   if (loading) {
     return (
@@ -24,13 +31,43 @@ export function RecipeDetailPage() {
       </div>
     )
   }
-  if (data?.meals[0].isFavorite === null) {
-    data.meals[0].isFavorite = false;
-  }
 
-  function handleFavorite {
-    data?.meals[0].isFavorite ? false : true;
-    favoriteRecipes.push(data?.meals[0]);
+  function handleFavorite() {
+    console.log(isFavorite);
+    if (!isFavorite) {
+      console.log("not");
+      addFavorite(data!.meals[0].idMeal, data!.meals[0].strMeal, data!.meals[0].strMealThumb);
+      // const newFavorite: FavoriteMeal = {
+      //   id: data?.meals[0].idMeal,
+      //   title: data?.meals[0].strMeal,
+      //   thumbnail: data?.meals[0].strMealThumb
+      // }
+      setIsFavorite(true);
+      // setFavorites((prevFavorites) => [...prevFavorites, newFavorite]);
+      // setStoredRecipes(favorites);
+      // console.log(favorites);
+      // displayFavorites(favorites);
+    } else {
+      console.log("is");
+      removeFavorite(data!.meals[0].idMeal);
+      // const newRecipes = favorites.filter((favorite) => favorite.id !== data?.meals[0].idMeal);
+      setIsFavorite(false);
+      // setFavorites(newRecipes);
+      // setStoredRecipes(favorites);
+      console.log(favorites);
+      // displayFavorites(favorites);
+    }
+
+    // console.log(data?.meals[0].isFavorite);
+    // if (data?.meals[0].isFavorite) {
+    //   data.meals[0].isFavorite = false;data.meals[0].isFavorite = false;
+    //   const newRecipes = favorites.filter((favorite) => favorite.idMeal !== data.meals[0].idMeal);
+    //   setFavorites(newRecipes);
+    //   setStoredRecipes(favorites);
+    // } else if (data?.meals[0].isFavorite === false) {      
+    //   data.meals[0].isFavorite = true;
+    //   setFavorites((prevFavorites) => [...prevFavorites, data?.meals[0]]);
+    // }   
   }
 
   return (
@@ -38,9 +75,9 @@ export function RecipeDetailPage() {
       <div className="recipe-full" key={data?.meals[0].idMeal}>
         <div className="recipe-head">
           <img src={data?.meals[0].strMealThumb} />
-        <h1>{data?.meals[0].strMeal}</h1>
-        <button onClick={handleFavorite}>{data?.meals[0].isFavorite ? "Remove from Favorites" : "Add to Favorites"}</button>
-        </div>        
+          <h1>{data?.meals[0].strMeal}</h1>
+          <button onClick={handleFavorite}>{isFavorite ? "Remove from Favorites" : "Add to Favorites"}</button>
+        </div>
         <div className="recipe-body">
           <div className="ingredients">
             <h2>Ingredients</h2>
