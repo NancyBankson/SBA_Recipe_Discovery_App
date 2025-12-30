@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import { useFetch } from "../../hooks/useFetch";
-import type { FavoriteMeal, FavoritesContextType, Recipe } from "../../types";
+import type { FavoriteMeal, Recipe } from "../../types";
 import { useState } from "react";
 import "./RecipeDetail.css"
 import { FavoritesContext } from "../../context/FavoritesContext";
@@ -37,41 +37,13 @@ export function RecipeDetailPage() {
   }
 
   function handleFavorite() {
-    console.log(isFavorite);
     if (!isFavorite) {
-      console.log("not");
       addFavorite(data!.meals[0].idMeal, data!.meals[0].strMeal, data!.meals[0].strMealThumb);
-      // const newFavorite: FavoriteMeal = {
-      //   id: data?.meals[0].idMeal,
-      //   title: data?.meals[0].strMeal,
-      //   thumbnail: data?.meals[0].strMealThumb
-      // }
       setIsFavorite(true);
-      // setFavorites((prevFavorites) => [...prevFavorites, newFavorite]);
-      // setStoredRecipes(favorites);
-      // console.log(favorites);
-      // displayFavorites(favorites);
     } else {
-      console.log("is");
       removeFavorite(data!.meals[0].idMeal);
-      // const newRecipes = favorites.filter((favorite) => favorite.id !== data?.meals[0].idMeal);
       setIsFavorite(false);
-      // setFavorites(newRecipes);
-      // setStoredRecipes(favorites);
-      console.log(favorites);
-      // displayFavorites(favorites);
     }
-
-    // console.log(data?.meals[0].isFavorite);
-    // if (data?.meals[0].isFavorite) {
-    //   data.meals[0].isFavorite = false;data.meals[0].isFavorite = false;
-    //   const newRecipes = favorites.filter((favorite) => favorite.idMeal !== data.meals[0].idMeal);
-    //   setFavorites(newRecipes);
-    //   setStoredRecipes(favorites);
-    // } else if (data?.meals[0].isFavorite === false) {      
-    //   data.meals[0].isFavorite = true;
-    //   setFavorites((prevFavorites) => [...prevFavorites, data?.meals[0]]);
-    // }   
   }
 
   return (

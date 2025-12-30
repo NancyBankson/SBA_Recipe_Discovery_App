@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom';
 import './App.css'
-import type { Recipe, FetchObj, FavoriteMeal } from './types';
+import type { FavoriteMeal } from './types';
 import { FavoritesContext } from './context/FavoritesContext';
-import { useFetch } from './hooks/useFetch';
 import { Navbar } from './components/Navbar';
 import { RecipeDetailPage } from './pages/RecipeDetailPage/RecipeDetailPage';
 import { HomePage } from './pages/HomePage/HomePage';
@@ -13,7 +12,6 @@ import { useLocalStorage } from './hooks/useLocalStorage';
 
 function App() {
   const [storedRecipes, setStoredRecipes] = useLocalStorage<FavoriteMeal[]>("favorites", []);
-  // const [favorites, setFavorites] = useState<FavoriteMeal[]>(storedRecipes);
   const [displayFavorites, setDisplayFavorites] = useState<FavoriteMeal[]>(storedRecipes)
 
   useEffect(() => {
@@ -27,15 +25,13 @@ function App() {
       thumbnail: thumbnail
     }
     setDisplayFavorites((prevDisplayFavorites) => [...prevDisplayFavorites, newFavorite]);
-    // setStoredRecipes(displayFavorites);
   }
 
   function removeFavorite(id: number) {
     const newRecipes = displayFavorites.filter((favorite) => favorite.id !== id);
     setDisplayFavorites(newRecipes);
-    // setStoredRecipes(displayFavorites);
   }
-  
+
   return (
     <>
       <div>

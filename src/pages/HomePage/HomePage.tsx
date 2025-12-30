@@ -31,7 +31,6 @@ export function HomePage() {
             <div className="category-card" key={category.idCategory}>
               <img src={category.strCategoryThumb} />
               <Link to={`/category/${category.strCategory}`}>{category.strCategory}</Link>
-              {/* <h3 id={category.idCategory.toString()} onClick={(event) => handleClick(category.idCategory, event)}>{category.strCategory}</h3> */}
               <p>{category.strCategoryDescription}</p>
             </div>
           );
