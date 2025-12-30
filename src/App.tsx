@@ -16,6 +16,10 @@ function App() {
   // const [favorites, setFavorites] = useState<FavoriteMeal[]>(storedRecipes);
   const [displayFavorites, setDisplayFavorites] = useState<FavoriteMeal[]>(storedRecipes)
 
+  useEffect(() => {
+    setStoredRecipes(displayFavorites);
+  }, [displayFavorites]);
+
   function addFavorite(id: number, title: string, thumbnail: string) {
     const newFavorite: FavoriteMeal = {
       id: id,
@@ -23,20 +27,15 @@ function App() {
       thumbnail: thumbnail
     }
     setDisplayFavorites((prevDisplayFavorites) => [...prevDisplayFavorites, newFavorite]);
-    setStoredRecipes(displayFavorites);
+    // setStoredRecipes(displayFavorites);
   }
 
   function removeFavorite(id: number) {
     const newRecipes = displayFavorites.filter((favorite) => favorite.id !== id);
     setDisplayFavorites(newRecipes);
-    setStoredRecipes(displayFavorites);
-    console.log(displayFavorites);
+    // setStoredRecipes(displayFavorites);
   }
-
-  useEffect(() => {
-    console.log(displayFavorites);
-  }, [displayFavorites]);
-
+  
   return (
     <>
       <div>

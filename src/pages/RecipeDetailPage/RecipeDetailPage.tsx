@@ -13,9 +13,13 @@ export function RecipeDetailPage() {
   const favoritesContext = useContext(FavoritesContext);
   const [storedRecipes, setStoredRecipes] = useLocalStorage<FavoriteMeal[]>("favorites", []);
   const [favorites, setFavorites] = useState<FavoriteMeal[]>(storedRecipes);
-  const [isFavorite, setIsFavorite] = useState<boolean>(false);
- 
-  const {addFavorite, removeFavorite} = favoritesContext;
+  const [isFavorite, setIsFavorite] = useState<boolean>(() => {
+    if (!favorites.find(favorite => favorite.id === recipeId)) {
+      return false;
+    } else return true;
+  });
+
+  const { addFavorite, removeFavorite } = favoritesContext;
 
   if (loading) {
     return (
