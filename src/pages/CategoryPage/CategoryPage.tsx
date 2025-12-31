@@ -3,6 +3,8 @@ import { useFetch } from "../../hooks/useFetch";
 import type { Recipe } from "../../types";
 import './CategoryPage.css'
 import { Link } from "react-router-dom";
+import { Spinner } from "../../components/Spinner";
+import { ErrorMessage } from "../../components/ErrorMessage";
 
 export function CategoryPage() {
   const { categoryName } = useParams();
@@ -10,14 +12,16 @@ export function CategoryPage() {
 
   if (loading) {
     return (
-      <div>
+      <div className="loading">
         Loading recipes...
+        <Spinner />
       </div>
     )
   }
   if (error) {
     return (
       <div>
+        <ErrorMessage />
         Error: {error.message}
       </div>
     )

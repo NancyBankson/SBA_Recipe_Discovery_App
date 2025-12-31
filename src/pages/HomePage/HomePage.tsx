@@ -3,6 +3,7 @@ import { useFetch } from '../../hooks/useFetch';
 import './HomePage.css'
 import { Link } from 'react-router-dom';
 import { Spinner } from '../../components/Spinner';
+import { ErrorMessage } from '../../components/ErrorMessage';
 
 export function HomePage() {
 
@@ -10,7 +11,7 @@ export function HomePage() {
 
   if (loading) {
     return (
-      <div>
+      <div className="loading">
         Loading recipes...
         <Spinner />
       </div>
@@ -19,6 +20,7 @@ export function HomePage() {
   if (error) {
     return (
       <div>
+        <ErrorMessage />
         Error: {error.message}
       </div>
     )

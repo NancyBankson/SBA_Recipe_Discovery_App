@@ -2,6 +2,7 @@ import { useSearchParams } from "react-router-dom"
 import { useFetch } from "../../hooks/useFetch";
 import type { Recipe } from "../../types";
 import { Link } from "react-router-dom";
+import { Spinner } from "../../components/Spinner";
 
 export function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -10,8 +11,9 @@ export function SearchPage() {
 
   if (loading) {
     return (
-      <div>
+      <div className="loading">
         Loading recipes...
+        <Spinner />
       </div>
     )
   }

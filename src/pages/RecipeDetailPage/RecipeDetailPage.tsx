@@ -6,6 +6,8 @@ import "./RecipeDetail.css"
 import { FavoritesContext } from "../../context/FavoritesContext";
 import { useContext } from "react";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { Spinner } from "../../components/Spinner";
+import { ErrorMessage } from "../../components/ErrorMessage";
 
 export function RecipeDetailPage() {
   const { recipeId } = useParams();
@@ -19,18 +21,26 @@ export function RecipeDetailPage() {
     } else return true;
   });
 
+  if (!favoritesContext) {
+    return (
+      <ErrorMessage />
+    )
+  }
+
   const { addFavorite, removeFavorite } = favoritesContext;
 
   if (loading) {
     return (
-      <div>
+      <div className="loading">
         Loading recipes...
+        <Spinner />
       </div>
     )
   }
   if (error) {
     return (
       <div>
+        <ErrorMessage />
         Error: {error.message}
       </div>
     )
