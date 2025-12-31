@@ -9,10 +9,11 @@ import { HomePage } from './pages/HomePage/HomePage';
 import { FavoritesPage } from './pages/FavoritesPage/FavoritesPage';
 import { CategoryPage } from './pages/CategoryPage/CategoryPage';
 import { useLocalStorage } from './hooks/useLocalStorage';
+import { SearchPage } from './pages/SearchPage/SearchPage';
 
 function App() {
   const [storedRecipes, setStoredRecipes] = useLocalStorage<FavoriteMeal[]>("favorites", []);
-  const [displayFavorites, setDisplayFavorites] = useState<FavoriteMeal[]>(storedRecipes)
+  const [displayFavorites, setDisplayFavorites] = useState<FavoriteMeal[]>(storedRecipes);
 
   useEffect(() => {
     setStoredRecipes(displayFavorites);
@@ -35,13 +36,14 @@ function App() {
   return (
     <>
       <div>
-        <FavoritesContext.Provider value={{addFavorite, removeFavorite, displayFavorites}}>
+        <FavoritesContext.Provider value={{ addFavorite, removeFavorite, displayFavorites }}>
           <Navbar />
           <Routes>
             <Route path="/home" element={<HomePage />} />
             <Route path="/category/:categoryName" element={<CategoryPage />} />
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="/recipe/:recipeId" element={<RecipeDetailPage />} />
+            <Route path="/search" element={<SearchPage />} />
           </Routes>
         </FavoritesContext.Provider>
       </div>
