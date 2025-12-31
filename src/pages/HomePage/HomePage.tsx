@@ -2,6 +2,7 @@ import type { Categories } from '../../types';
 import { useFetch } from '../../hooks/useFetch';
 import './HomePage.css'
 import { Link } from 'react-router-dom';
+import { Spinner } from '../../components/Spinner';
 
 export function HomePage() {
 
@@ -11,6 +12,7 @@ export function HomePage() {
     return (
       <div>
         Loading recipes...
+        <Spinner />
       </div>
     )
   }

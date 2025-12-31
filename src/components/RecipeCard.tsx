@@ -1,4 +1,6 @@
-export function RecipeCard( { recipe }) {
+import type { Recipe } from "../types";
+
+export function RecipeCard( { recipe }: {recipe: Recipe}) {
 
     return (
         <div>

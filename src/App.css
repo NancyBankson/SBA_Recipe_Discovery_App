@@ -19,3 +19,19 @@
     animation: logo-spin infinite 20s linear;
   }
 }
+
+/* 1. Define the spinning animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 2. Style the spinner element */
+.pure-css-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1); /* Light gray border */
+  border-top: 4px solid #3498db; /* Blue top border for the "filled" effect */
+  border-radius: 50%; /* Makes the div a perfect circle */
+  width: 40px; /* Adjust size as needed */
+  height: 40px; /* Adjust size as needed */
+  animation: spin 1s linear infinite; /* Apply the animation */
+}
