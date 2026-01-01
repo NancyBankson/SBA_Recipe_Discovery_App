@@ -1,73 +1,80 @@
-# React + TypeScript + Vite
+# SBA 10 Recipe Discovery App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+The purpose of this assignment was to build a client-side Recipe Discovery App.  The assignment was built using advanced React knowledge including, custom hooks, context, and React Router.  It also required data to be fetched from an API, creating a need for a useFetch custom hook, and handling of loading time and errors.  The recipe data was obtained from TheMealDB, at "https://www.themealdb.com/."
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+Implementation of this project required: 
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+1. State Management & Data Fetching
 
-## Expanding the ESLint configuration
+  - Use the useState and useEffect hooks to fetch and display data from the API.
+  - Your application should manage loading and error states gracefully, displaying appropriate UI indicators to the user (e.g., a loading spinner, an error message).
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+2. Custom Hooks
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+You must create and implement at least two custom hooks:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+  - useFetch (or similar): A generic custom hook for handling data fetching logic. It should manage the data, loading state, and error state. This hook will be used throughout your application to communicate with the API.
+  - useLocalStorage: A custom hook to synchronize a piece of state with the browser’s localStorage. This will be used to persist the user’s list of favorite recipes.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. Global State with Context API
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+  - Create a FavoritesContext to manage the user’s list of favorite recipes globally.
+  - The context must provide:
+    - A list of favorite recipe IDs.
+    - A function to add a recipe to favorites.
+    - A function to remove a recipe from favorites.
+    A function to check if a recipe is already in favorites.
+  - This context should use your useLocalStorage hook internally to persist the favorites list across browser sessions.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+4. Routing
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Your application must include the following pages and routing logic:
+
+  - Home Page (/):
+    - Displays a grid or list of all available recipe categories fetched from the API.
+    - Each category should be a link that navigates to its respective category page.
+
+  - Category Page (/category/[categoryName]):
+    - A dynamic route that displays all recipes belonging to the category specified in the URL (e.g., /category/Seafood).
+    - Each recipe shown should be a link to its detailed recipe page.
+
+  - Recipe Detail Page (/recipe/[recipeId]):
+    - A dynamic route that fetches and displays the full details for a single recipe (image, ingredients, instructions, etc.).
+    - This page must include a button to “Add to Favorites” or “Remove from Favorites”. The button’s state and action should be handled by your FavoritesContext.
+
+  - Favorites Page (/favorites):
+    - Displays a list of all recipes that the user has marked as a favorite.
+    - If the user has no favorites, this page should display a message prompting them to browse and add some.
+
+  - Search Functionality:
+    - A search bar, likely in a shared Navbar, that allows users to search for recipes by name.
+    - Submitting a search should navigate the user to a search results page (e.g., /search?query=Arrabiata). This page will display the results of the search query.
+
+5. Components & UI
+
+  - Create reusable, well-styled components (e.g., RecipeCard, Navbar, Spinner, ErrorMessage).
+  - The application should be visually appealing and responsive. Use of a CSS framework, CSS-in-JS, or CSS Modules is up to you.
+
+## Tools
+
+- HTML
+- CSS
+- JavaScript
+- TypeScript
+- React
+- Vite
+- React Router
+
+To Run this React application, follow the following steps in the terminal:
+npm create vite@latest
+cd task-dashboard
+npm install
+npm run dev
+
+## Reflection
+
+I enjoyed implementing the code for this assignment.  Making a recipe app was a fun way to use all the new skills learned in React.  One of the new things I had to learn was using useSearchParams for the search bar.  It took some time to figure it out, but I'm happy with the search results.  A challenge I faced was using TypeScript with React.  Some of the labs I did, I only used JavaScript, so I found it hard to avoid type errors this time.  I really don't like using TypeScript with React.  It should save time by allowing the developer to deal with compile errors instead of run time errors, but I find that chasing down all the type errors is more time consuming than dealing with run time errors.  The types are much more complicated in React and less intuitive.  I would prefer using JavaScript with React in the future if given a choice, but I'm glad for the exposure.  It's a good skill to have.  Overall, I'm happy with the results of this SBA, but given more time, I would improve the CSS to make it look better.
