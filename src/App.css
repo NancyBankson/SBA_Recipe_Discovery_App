@@ -5,15 +5,6 @@
   text-align: center;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
@@ -40,3 +31,37 @@
   height: 40px; /* Adjust size as needed */
   animation: spin 1s linear infinite; /* Apply the animation */
 }
+
+/* The CSS for the spinner was taken from a google search on creating a spinner without Bootstrap or Tailwind. */
+
+ul {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  gap: 20px;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin: 20px 0;
+}
+
+nav label {
+  margin: 0 10px 0 30px;
+}
+
+nav input {
+  margin: 0 10px;
+}
+
+nav button {
+  margin: 0 10px;
+}
+
+img {
+  border-radius: 15px;
+}
+

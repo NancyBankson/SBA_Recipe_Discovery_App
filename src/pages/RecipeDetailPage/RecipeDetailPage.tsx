@@ -92,8 +92,8 @@ export function RecipeDetailPage() {
           <p>{data?.meals[0].strInstructions}</p>
           <h3>Area: {data?.meals[0].strArea}</h3>
           <h3>Category: {data?.meals[0].strCategory}</h3>
-          <h3>Source: {data?.meals[0].strSource}</h3>
-          <h3>Video: {data?.meals[0].strYoutube}</h3>
+          <h3>Source: <a href={data?.meals[0].strSource}>{data?.meals[0].strSource}</a></h3>
+          <h3>Video: <a href={data?.meals[0].strYoutube}>{data?.meals[0].strYoutube}</a></h3>
         </div>
       </div>
     </div>
