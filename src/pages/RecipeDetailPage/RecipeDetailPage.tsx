@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useFetch } from "../../hooks/useFetch";
 import type { FavoriteMeal, Recipe } from "../../types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./RecipeDetail.css"
 import { FavoritesContext } from "../../context/FavoritesContext";
 import { useContext } from "react";
@@ -28,6 +28,12 @@ export function RecipeDetailPage() {
   }
 
   const { addFavorite, removeFavorite } = favoritesContext;
+
+  // added to address error
+  useEffect(() => {
+    setStoredRecipes([...storedRecipes]);
+    setFavorites([...favorites]);
+  }, []);
 
   if (loading) {
     return (

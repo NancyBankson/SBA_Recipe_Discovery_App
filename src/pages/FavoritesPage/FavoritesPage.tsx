@@ -5,10 +5,11 @@ import type { FavoriteMeal } from "../../types";
 import { ErrorMessage } from "../../components/ErrorMessage";
 
 export function FavoritesPage() {
-  const { displayFavorites } = useContext(FavoritesContext);
+  // const { displayFavorites } = useContext(FavoritesContext);
+  const favoritesContext = useContext(FavoritesContext);
   const [favRecipes, setFavRecipes] = useState<FavoriteMeal[]>([]);
 
-  if (!displayFavorites) {
+  if (!favoritesContext) {
     return (
       <div>
         <ErrorMessage />
@@ -16,10 +17,13 @@ export function FavoritesPage() {
     )
   }
 
+  const { displayFavorites } = favoritesContext;
+
   if (favRecipes.length != displayFavorites.length) {
-    for (let i = 0; i < displayFavorites.length; i++) {
-      favRecipes.push(displayFavorites[i]);
-    }
+    // for (let i = 0; i < displayFavorites.length; i++) {
+    //   favRecipes.push(displayFavorites[i]);
+    // }
+    setFavRecipes([...favRecipes,...displayFavorites]);
   }
 
   if (favRecipes.length === 0) {

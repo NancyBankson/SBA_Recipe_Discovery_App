@@ -3,7 +3,8 @@ import { useState } from "react";
 
 export function Navbar() {
     const [searchValue, setSearchValue] = useState("");
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [
+        , setSearchParams] = useSearchParams();
     const navigate = useNavigate();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
