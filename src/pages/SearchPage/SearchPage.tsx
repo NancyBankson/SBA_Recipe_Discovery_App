@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom"
 import { useFetch } from "../../hooks/useFetch";
 import type { Recipe } from "../../types";
@@ -8,6 +9,11 @@ export function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const queryValue = searchParams.get('query');
   const { data, loading, error } = useFetch<{ meals: Recipe[] }>(`https://www.themealdb.com/api/json/v1/1/search.php?s=${queryValue}`);
+
+   // added to address error
+    useEffect(() => {
+      setSearchParams([...searchParams]);
+    }, []);
 
   if (loading) {
     return (
